@@ -17,3 +17,10 @@ TODO
 
    * playbook structure and sharing with the guest
    * 
+
+
+Misc
+----
+
+Limiting running the playbook to a single host or group of hosts:
+http://stackoverflow.com/a/18195217
