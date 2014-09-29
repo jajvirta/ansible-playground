@@ -41,6 +41,7 @@
 
 # add basic jboss admin user, either through add-user.sh or templating mgmt-user.properties
 #   => is it possible?
+#   => http://marvelley.com/blog/2014/04/23/handling-interactive-ansible-tasks/
 # put oracle module in place
 # put other local modifications in place
 # put init scripts in place
