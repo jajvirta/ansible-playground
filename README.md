@@ -1,11 +1,19 @@
 Ansible Playground
 ==================
 
-Goal: vagrant up bootstraps an environment that has Ansible installed
-and can run and configure itself using playbooks in shared folder.
+Goal: 'vagrant up' bootstraps an environment that has Ansible
+installed and can run and configure itself using playbooks in shared
+folder. Useful for experimenting with Ansible playbooks in a Windows
+environment.
 
+Requirements
+------------
 
-TODO:
+   * Vagrant
+   * Oracle VirtualBox (or some other host provision platform)
+
+TODO
+----
 
    * playbook structure and sharing with the guest
    * 
