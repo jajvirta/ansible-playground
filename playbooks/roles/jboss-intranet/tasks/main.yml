@@ -1,0 +1,47 @@
+---
+
+- name: Install Java 1.7 and some basic dependencies
+  apt: name={{item}} state=present
+  sudo: yes
+  with_items:
+    - unzip
+    - openjdk-7-jre
+
+- name: Add user "jboss"
+  sudo: yes
+  user: name=jboss
+
+- name: extract jboss zip
+  sudo: yes
+  command: chdir=/usr/local /usr/bin/unzip -q /srv/playbooks/files/jboss-eap-6.2.0.zip
+           creates=/usr/local/jboss-eap-6.2
+
+- name: Rename install directory
+  sudo: yes
+  command: chdir=/usr/local /bin/mv jboss-eap-6.2 jbossas_intranet
+           creates=/usr/local/jbossas_intranet
+
+- name: Create log directory
+  sudo: yes
+  command: chdir=/usr/local/jbossas_intranet /bin/mkdir domain/log
+           creates=/usr/local/jbossas_intranet/domain/log
+
+- name: Create servers directory
+  sudo: yes
+  command: chdir=/usr/local/jbossas_intranet /bin/mkdir domain/servers
+           creates=/usr/local/jbossas_intranet/domain/servers
+
+- name: Change ownership of JBoss installation
+  sudo: yes
+  file: path=/usr/local/jbossas_intranet/ owner=jboss state=directory recurse=yes
+
+- name: Starts JBoss
+  remote_user: jboss
+  command: chdir=/usr/local/jbossas_intranet/bin /bin/sh domain.sh
+
+# add basic jboss admin user, either through add-user.sh or templating mgmt-user.properties
+#   => is it possible?
+# put oracle module in place
+# put other local modifications in place
+# put init scripts in place
+# run jboss-cli files

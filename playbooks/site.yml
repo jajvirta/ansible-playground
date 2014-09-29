@@ -2,7 +2,6 @@
 - hosts: local
   connection: local
 
-  tasks:
-  - name: foo
-    shell: /bin/echo foo
+  roles:
+    - jboss-intranet
 
