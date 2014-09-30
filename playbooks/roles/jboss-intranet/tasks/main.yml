@@ -14,7 +14,7 @@
 - name: extract jboss zip
   sudo: yes
   command: chdir=/usr/local /usr/bin/unzip -q /srv/playbooks/files/jboss-eap-6.2.0.zip
-           creates=/usr/local/jboss-eap-6.2
+           creates=/usr/local/jbossas_intranet
 
 - name: Rename install directory
   sudo: yes
@@ -35,9 +35,9 @@
   sudo: yes
   file: path=/usr/local/jbossas_intranet/ owner=jboss state=directory recurse=yes
 
-- name: Starts JBoss
-  remote_user: jboss
-  command: chdir=/usr/local/jbossas_intranet/bin /bin/sh domain.sh
+#- name: Starts JBoss
+#  remote_user: jboss
+#  command: chdir=/usr/local/jbossas_intranet/bin /bin/sh domain.sh
 
 # add basic jboss admin user, either through add-user.sh or templating mgmt-user.properties
 #   => is it possible?
