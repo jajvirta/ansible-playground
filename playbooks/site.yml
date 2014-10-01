@@ -2,6 +2,9 @@
 - hosts: local
   connection: local
 
+  vars:
+    jboss_version: 6.2.0
+    jboss_dir: jboss-eap-6.2
+
   roles:
     - jboss-intranet
-

@@ -13,12 +13,12 @@
 
 - name: extract jboss zip
   sudo: yes
-  command: chdir=/usr/local /usr/bin/unzip -q /srv/playbooks/files/jboss-eap-6.2.0.zip
-           creates=/usr/local/jbossas_intranet
+  command: chdir=/usr/local /usr/bin/unzip -q /srv/playbooks/files/jboss-eap-{{ jboss_version }}.zip
+           creates=/usr/local/{{ jboss_dir }}
 
-- name: Rename install directory
+- name: Link install directory
   sudo: yes
-  command: chdir=/usr/local /bin/mv jboss-eap-6.2 jbossas_intranet
+  command: chdir=/usr/local /bin/ln -sf {{ jboss_dir }} jbossas_intranet
            creates=/usr/local/jbossas_intranet
 
 - name: Create log directory
@@ -34,6 +34,26 @@
 - name: Change ownership of JBoss installation
   sudo: yes
   file: path=/usr/local/jbossas_intranet/ owner=jboss state=directory recurse=yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #- name: Starts JBoss
 #  remote_user: jboss
