@@ -36,10 +36,11 @@
   file: path=/usr/local/jbossas_intranet/ owner=jboss state=directory recurse=yes
 
 - name: Prefill JBoss CLIs
-  template: src=add-ds-eee.cli.j2 dest=/home/vagrant/add-ds-eee.cli
-  template: src=add-ds-aaa.cli.j2 dest=/home/vagrant/add-ds-aaa.cli
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: 'add-ds-eee.cli.j2', dest: '/home/vagrant/add-ds-eee.cli' }
+    - { src: 'add-ds-aaa.cli.j2', dest: '/home/vagrant/add-ds-aaa.cli' }
   register: cli_generation
-
 
 - name: Run CLI files to domain
   command: /bin/echo "running cli files against domain"
