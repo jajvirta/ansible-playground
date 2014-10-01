@@ -1,11 +1,11 @@
 ---
 
 - name: Install Java 1.7 and some basic dependencies
-  apt: name={{item}} state=present
+  yum: name={{item}} state=present
   sudo: yes
   with_items:
     - unzip
-    - openjdk-7-jre
+    - java-1.6.0-openjdk-devel.x86_64
 
 - name: Add user "jboss"
   sudo: yes
