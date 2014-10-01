@@ -1,0 +1,19 @@
+if (outcome == success) of /profile=full/subsystem=datasources/data-source=AaaDS:read-resource
+  /profile=full/subsystem=datasources/data-source=AaaDS:remove
+end-if
+
+/profile=full/subsystem=datasources/data-source=AaaDS \
+  :add( jndi-name=java:/AaaDS, \
+        connection-url="{{ aaa_db_url }}",\
+        user-name={{ aaa_db_user }}, \
+        password={{ aaa_db_password }}, \
+        check-valid-connection-sql="select 1 from dual", \
+        background-validation-millis=180000, \
+        min-pool-size=2, \
+        max-pool-size=51, \
+        driver-name=OracleJDBCDriver, \
+        driver-class=oracle.jdbc.OracleDriver, \
+        use-ccm=false, \
+        jta=true)
+
+/profile=full/subsystem=datasources/data-source=AaaDS:enable
