@@ -1,1 +1,2 @@
 ansible-enabled-vagrant-host/.vagrant/
+playbooks/files/jboss-eap-6.2.0.zip
