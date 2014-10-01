@@ -6,8 +6,11 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "hashicorp/precise32"
-
+  config.vm.box_url =
+    "https://googledrive.com/host/0B4tZlTbOXHYWVGpHRWZuTThGVUE/centos65_virtualbox_50G.box"
+  
+  config.vm.box = "centos65-x86_64-20140116"
+  
   config.vm.provision :shell, path: "bootstrap.sh"
 
   config.vm.synced_folder "../playbooks", "/srv/playbooks"
