@@ -6,6 +6,11 @@ yum update -y gmp
 cat <<EOF > /etc/ansible/hosts
 [local]
 127.0.0.1
+
+[local:vars]
+version_name=Tuki SHOK:n jaksohakemukselle
+eval_version=8.1.16
+asta_version=4.3.1
 EOF
 
 mkdir /etc/ansible/host_vars
