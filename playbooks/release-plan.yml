@@ -1,0 +1,9 @@
+---
+- hosts: "{{ target }}" 
+  connection: local
+  gather_facts: False
+ 
+  roles:
+    - relplan
+    - eval-app
+    

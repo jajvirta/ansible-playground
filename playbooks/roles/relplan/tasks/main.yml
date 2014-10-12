@@ -1,0 +1,6 @@
+---
+
+- include_vars: "{{ plan }}"
+
+- name: foo
+  debug: "foo!"
