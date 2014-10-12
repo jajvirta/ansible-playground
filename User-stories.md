@@ -51,5 +51,38 @@ Tuotantoon siirrettävä versio asennetaan test-masterille
    * seuraan asennuksen etenemistä
 
 
+Asennussuunitelman käyttö
+-------------------------
+
+`release-plan.yml`:
+
+    - hosts: local
+      connection: local
+      gather_facts: False
+    
+      roles:
+        - relplan
+        - eval-app
+
+`roles/relplan/tasks/main.yml`:
+
+    - include_vars: "{{ plan }}"
+
+`shok-v1.yml`:
+
+    version_description: Tuki SHOK:n jaksohakemukselle, v1
+    eval_version: 8.3.1
+    asta_version: 4.4.4
+
+Komento:
+
+   * `ansible-playbook -i /etc/ansible/hosts/test-eval release-plan.yml --extra-vars plan=shok-v1.yml`
+
+
+
+
+
+
+
 
   
