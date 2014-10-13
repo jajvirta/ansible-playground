@@ -1,0 +1,6 @@
+---
+
+
+- name: asenna {{ name }}
+  command: /bin/echo "foo" {{ version }}
+

@@ -1,0 +1,12 @@
+---
+
+- name: asennal eval
+  command: /bin/bash /home/vagrant/eval.sh {{ eval_version }} {{ version_description }}
+  register: eval_installation
+  when: eval_version is defined
+
+- debug: var=eval_installation.stdout_lines
+
+- name: smoketestaa eval
+  wait_for: path=/home/vagrant/eval.log search_regex="up and running"
+  when: eval_installation.changed 

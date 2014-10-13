@@ -1,0 +1,7 @@
+---
+
+- name: asenna {{ name }}
+  command: /bin/bash /home/vagrant/install-mule-app.sh {{ name }} {{ mule_version }} {{ version }}
+
+- name: smoketestaa {{ name }}
+  command: /bin/bash /home/vagrant/qa/{{ script_name }}
