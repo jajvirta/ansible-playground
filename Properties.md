@@ -4,7 +4,7 @@ Workflow propsun lisäämisessä
 
 
 Versionhallintaan uusi propsu
-=============================
+-----------------------------
 
 
 `dev-kone$ vi eval_trunk/eval-properties/src/main/resources/eval.properties.template`
@@ -15,13 +15,13 @@ Versionhallintaan uusi propsu
 
 
 Version julkaisu Jenkinsillä
-=========================
+-------------------------
 
 jne normaalisti
 
 
 Asennuksen testaus devaajan koneella
-==============================
+------------------------------
 
 (Oletetaan nyt, että tietokantakin tulee virtual/dev-ympäristöön.)
 
@@ -30,21 +30,23 @@ Asennuksen testaus devaajan koneella
     vagrant ssh 
     cd /vagrant
     ansible-playbook --extra-vars eval_version=8.7.0 apps.yml 
+    ... 
+    deploy failed: variable ’dm_attachments_url’ is not defined. 
 
 Asennus kohdekoneella
+---------------
 
 
-3. webproxy-lan-02 $ install-eval-on-testqa.sh eval_version=8.4.0 apps.yml
-…
-deploy failed: variable ’vhs_service_url’ is not defined. 
+    webproxy-lan-02$ install-eval-on-testqa.sh eval_version=8.7.0 apps.yml
 
-4. webproxy-lan-02 $ vi /etc/ansible/host_vars/test-qa.tekes.fi
-…
+    deploy failed: variable ’dm_attachments_url’ is not defined. 
+
+    webproxy-lan-02$ vi /etc/ansible/host_vars/test-qa.tekes.fi
 
 
 
 Lisäherkkuja
-============
+------------
 
 Mitäs jos lisäpropsu vaatii muitakin infra-muutoksia, esimerkiksi apachen-konffin 
 muutoksen?
