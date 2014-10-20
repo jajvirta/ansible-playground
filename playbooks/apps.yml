@@ -1,0 +1,12 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: False
+
+  vars_prompt:
+    version_description: "Lyhyt kuvaus asennettavasta versiosta"
+    
+  roles:
+    - apps
+
+# jboss-apps ja mule-apps?

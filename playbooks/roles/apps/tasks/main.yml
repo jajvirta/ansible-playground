@@ -1,0 +1,57 @@
+---
+
+
+# uudelleenkaytettava task-files tahan?
+#- include: jboss-app.yml name=eval version=eval_version
+#  when: eval_version is defined
+
+- name: asennal eval 
+  command: /bin/bash /home/vagrant/eval.sh {{ eval_version }} {{ version_description }}
+  register: eval_installation
+  when: eval_version is defined
+  tags:
+    - eval
+
+- name: aja evalin kantapaivitykset
+  command: /bin/bash /home/vagrant/updatedb.sh {{ eval_version }}
+  when: eval_version is defined
+  tags:
+    - eval
+    - dbmaintain
+
+- debug: var=eval_installation.stdout_lines
+  when: eval_version is defined
+
+- name: smoketestaa eval
+  wait_for: path=/home/vagrant/eval.log search_regex="up and running"
+  when: eval_version is defined and eval_installation.changed 
+
+- name: asenna asta
+  command: /bin/bash /home/vagrant/asta.sh {{ asta_version }}
+  register: asta_installation
+  when: asta_version is defined
+
+- name: smoketestaa asta
+  wait_for: path=/home/vagrant/eval.log search_regex="up and running"
+  when: asta_installation.changed 
+
+- name: asenna asiointi
+  command: /bin/bash /home/vagrant/asta.sh {{ asiointi_version }}
+  when: asiointi_version is defined
+
+# mule appit
+
+- include: mule-app.yml name=vhs-service version={{ vhs_version }} mule_version=3.4 script_name=test-vhs.sh
+  when: vhs_version is defined
+
+- include: mule-app.yml name=lead-service version={{ lead_version }} mule_version=3.4 script_name=test-lead.sh
+  when: lead_version is defined
+
+
+
+
+
+
+
+
+
