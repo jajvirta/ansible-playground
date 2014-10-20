@@ -1,6 +1,6 @@
 
 Workflow propsun lisäämisessä
------------------------------
+=============================
 
 
 Versionhallintaan uusi propsu
@@ -23,26 +23,33 @@ jne normaalisti
 Asennuksen testaus devaajan koneella
 ------------------------------
 
-(Oletetaan nyt, että tietokantakin tulee virtual/dev-ympäristöön.)
-
     cd ~/projects/asennus-skriptit/ansible
     vagrant up
-    vagrant ssh 
+    vagrant ssh -- -R 1521:localhost:1521
     cd /vagrant
     ansible-playbook --extra-vars app_version=8.7.0 apps.yml 
     ... 
     deploy failed: variable ’dm_attachments_url’ is not defined. 
 
+    echo "dm_attachments_url: localhost:6009/dm-attachments" >> /etc/ansible/host_vars/localhost
+    
+    ansible-playbook --extra-vars app_version=8.7.0 apps.yml 
+
+Selaimella URLiin: http://localhost/app
+
+
 Asennus kohdekoneella
 ---------------
 
+    ssh webproxy-lan-02
+    ssh-agent bash
+    ssh-add 
 
     webproxy-lan-02$ install-app-on-testqa.sh app_version=8.7.0 apps.yml
 
     deploy failed: variable ’dm_attachments_url’ is not defined. 
 
-    webproxy-lan-02$ vi /etc/ansible/host_vars/test-qa.tekes.fi
-
+    webproxy-lan-02$ echo "dm_attachments_url: localhost:6009/dm-attachments" >> /etc/ansible/host_vars/test-qa.tekes.fi
 
 
 Lisäherkkuja
