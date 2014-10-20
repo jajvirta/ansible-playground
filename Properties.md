@@ -7,10 +7,10 @@ Versionhallintaan uusi propsu
 -----------------------------
 
 
-`dev-kone$ vi eval_trunk/eval-properties/src/main/resources/eval.properties.template`
+`dev-kone$ vi app_trunk/app-properties/src/main/resources/app.properties.template`
 
-    db_url={{ eval_db_url }}
-    db_user={{ eval_db_user }}
+    db_url={{ app_db_url }}
+    db_user={{ app_db_user }}
     => dm.attachments.url={{ dm_attachments_url }}
 
 
@@ -29,7 +29,7 @@ Asennuksen testaus devaajan koneella
     vagrant up
     vagrant ssh 
     cd /vagrant
-    ansible-playbook --extra-vars eval_version=8.7.0 apps.yml 
+    ansible-playbook --extra-vars app_version=8.7.0 apps.yml 
     ... 
     deploy failed: variable ’dm_attachments_url’ is not defined. 
 
@@ -37,7 +37,7 @@ Asennus kohdekoneella
 ---------------
 
 
-    webproxy-lan-02$ install-eval-on-testqa.sh eval_version=8.7.0 apps.yml
+    webproxy-lan-02$ install-app-on-testqa.sh app_version=8.7.0 apps.yml
 
     deploy failed: variable ’dm_attachments_url’ is not defined. 
 
