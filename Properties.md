@@ -42,14 +42,14 @@ Asennus kohdekoneella
 ---------------
 
     ssh ansible-master
-    ssh-agent bash
-    ssh-add 
 
     install-app-on-testqa.sh app_version=8.7.0 apps.yml
     ...
     deploy failed: variable ’dm_attachments_url’ is not defined. 
 
     echo "dm_attachments_url: localhost:6009/dm-attachments" >> /etc/ansible/host_vars/test-qa.tekes.fi
+    git add /etc/ansible/host_vars/test-qa.tekes.fi
+    git commit -m "lisätty dmliitepalvelun url"
     
     install-app-on-testqa.sh app_version=8.7.0 apps.yml
     -> generoi propsu /etc/foo/:n alle
