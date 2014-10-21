@@ -7,17 +7,20 @@ Versionhallintaan uusi propsu
 -----------------------------
 
 
-`dev-kone$ vi app_trunk/app-properties/src/main/resources/app.properties.template`
+    dev-kone$ vi app_trunk/app-properties/src/main/resources/app.properties.template
 
     db_url={{ app_db_url }}
     db_user={{ app_db_user }}
     => dm.attachments.url={{ dm_attachments_url }}
 
+    svn ci -m "uusi propsu, dmliitepalvelun url" 
 
-Version julkaisu Jenkinsillä
+Version release Jenkinsillä
 -------------------------
 
 jne normaalisti
+
+Syntyy: app 8.7.0 tms.
 
 
 Asennuksen testaus devaajan koneella
@@ -68,17 +71,17 @@ muutoksen?
 
     dev-kone$ vi app_trunk/app-properties/app.properties.template
 
-    => vhs_service_url: localhost/vhs-service
+    => dm_attachments_service_service_url: localhost/dm_attachments_service-service
 
     dev-kone$ vi asennus-skriptit/ansible/roles/apache/templates/tekes.conf.template
 
-    ProxyPass /vhs-service http://localhost:6543/vhs-service
-    ProxyPassReverse /vhs-service http://localhost:6543/vhs-service
+    ProxyPass /dm_attachments_service-service http://localhost:6543/dm_attachments_service-service
+    ProxyPassReverse /dm_attachments_service-service http://localhost:6543/dm_attachments_service-service
 
 tai jopa:
 
-    ProxyPass /vhs-service http://{{ hostname }}:6543/vhs-service
-    ProxyPassReverse /vhs-service http://{{ hostname }}:6543/vhs-service
+    ProxyPass /dm_attachments_service-service http://{{ hostname }}:6543/dm_attachments_service-service
+    ProxyPassReverse /dm_attachments_service-service http://{{ hostname }}:6543/dm_attachments_service-service
 
 sitten:
 
